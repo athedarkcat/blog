@@ -1,0 +1,31 @@
+.fa{
+  display: inline-block;
+  width:25px;
+  height: 25px;
+  margin-right: 10px!important;
+  vertical-align: middle;
+}
+.fa-diamond{
+  background-image: url('/static/img/filter_button.png');
+  background-size: 100% 100%;
+}
+.fa-book{
+  background-image: url('/static/img/ios/book-icon.png');
+  background-size: 100% 100%;
+}
+.fa-link{
+  background-image: url('/static/img/ios/link-icon.png');
+  background-size: 100% 100%;
+}
+.fa-about{
+  background-image: url('/static/img/ios/about-icon.png');
+  background-size: 100% 100%;
+}
+.fa-tool{
+  background-image: url('/static/img/ios/tool-icon.png');
+  background-size: 100% 100%;
+}
+.fa-menus{
+  background-image: url('/static/img/ios/menus-icon.png');
+  background-size: 100% 100%;
+}

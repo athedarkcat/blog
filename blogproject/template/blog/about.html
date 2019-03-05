@@ -1,0 +1,65 @@
+{% extends 'common/base_nav.html' %}
+{% load staticfiles %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" href="{% static 'css/icon.css' %}">
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>About | Dark Cat</title>
+{% endblock %}
+
+{% block content %}
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+
+
+  <!-- Header -->
+  <header id="aboutme">
+    <a href="#"><img src="{% static 'img/face.jpg' %}" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-menus"></i></span>
+    <div class="w3-container">
+    <h1><b>About Me</b></h1>
+    </div>
+  </header>
+
+  <!-- About Me -->
+  <div class="w3-container w3-padding-large self-about">
+    <p>学生党、社会人、爱猫人士、技术宅</p>
+    <p>本站功能还未完善</p>
+    <hr>
+  </div>
+
+
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-large w3-grey">
+    <h4 id="contact"><b>Contact Me</b></h4>
+    <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
+      <div class="w3-col w3-teal">
+        <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
+        <p>如果您有什么意见，欢迎发邮箱给我</p>
+      </div>
+    </div>
+    <hr class="w3-opacity">
+    <form action="/action_page.php" target="_blank">
+      <div class="w3-section">
+        <label>Name</label>
+        <input class="w3-input w3-border" type="text" name="Name" required>
+      </div>
+      <div class="w3-section">
+        <label>Email</label>
+        <input class="w3-input w3-border" type="text" name="Email" required>
+      </div>
+      <div class="w3-section">
+        <label>Message</label>
+        <input class="w3-input w3-border" type="text" name="Message" required>
+      </div>
+      <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Send Message</button>
+    </form>
+  </div>
+
+</div>
+{% endblock %}
