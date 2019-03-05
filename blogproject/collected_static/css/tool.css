@@ -1,0 +1,24 @@
+header{
+  font-size: 1.5rem;
+  padding: 2px 20px;
+  margin-bottom: 20px;
+}
+.date{
+  margin-left: 10px;
+}
+.item{
+  display: inline-block;
+  border-right:2px solid black;
+  margin-left: 10px;
+  padding:0 10px;
+}
+.item:last-child{
+  display: none;
+}
+.tool-title{
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+.tool>p{
+  margin-left: 80px;
+}

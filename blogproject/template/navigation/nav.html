@@ -1,0 +1,34 @@
+{% load staticfiles %}
+{% load tag %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/tool.css' %}">
+  <title>Navigation | Dark Cat</title>
+</head>
+<body>
+  <header class="container-fuild bg-dark">
+    <a  class="float-right text-white " disabled >退出</a>
+    <div class="clearfix"></div>
+  </header>
+
+
+  {% if navs %}
+    {% for nav in navs %}
+      <div class="tool">
+        <h2 class='tool-title'>{{ nav.title }}</h2>
+        <p>更新时间: <span class='date'>{{ nav.modified_time|date:'Y-y-d' }}</span></p>
+        <p>教程地址: <a class="date" href="{{ nav.link }}">地址1</a></p>
+      </div>
+      <hr>
+    {% endfor %}
+  {% else %}
+    <p>没有教程</p>
+  {% endif %}
+
+</body>
+</html>
