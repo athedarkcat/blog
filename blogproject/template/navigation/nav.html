@@ -1,34 +1,50 @@
+{% extends 'common/base_nav.html' %}
 {% load staticfiles %}
-{% load tag %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/tool.css' %}">
-  <title>Navigation | Dark Cat</title>
-</head>
-<body>
-  <header class="container-fuild bg-dark">
-    <a  class="float-right text-white " disabled >退出</a>
-    <div class="clearfix"></div>
+
+
+{% block title %}
+<title>Nav | Dark Cat</title>
+{% endblock %}
+
+{% block content %}
+<div class="w3-main" style="margin-left:300px">
+
+  <!-- Header -->
+  <header id="catfood">
+    <a href="#"><img src="{% static 'img/face.jpg' %}" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-menus"></i></span>
+    <div class="w3-container">
+    <h1><b>Links</b></h1>
+    </div>
   </header>
 
 
-  {% if navs %}
+  <div class="w3-container">
     {% for nav in navs %}
-      <div class="tool">
-        <h2 class='tool-title'>{{ nav.title }}</h2>
-        <p>更新时间: <span class='date'>{{ nav.modified_time|date:'Y-y-d' }}</span></p>
-        <p>教程地址: <a class="date" href="{{ nav.link }}">地址1</a></p>
+    <div class="w3-quarter w3-card-4 w3-container w3-margin w3-white" style="min-height:100px;">
+      <div class="w3-container">
+        <h5><b>{{ nav.title }}</b></h5>
+        <h6>更新日期, <span class="w3-opacity">{{ nav.modified_time }}</span></h6>
+        <p>
+          <a href="{{ nav.link }}"><button class="w3-button w3-padding-small w3-white w3-border"><b>链接</b></button></a>
+        </p>
       </div>
-      <hr>
+    </div>
     {% endfor %}
-  {% else %}
-    <p>没有教程</p>
-  {% endif %}
+  </div>
 
-</body>
-</html>
+    <!-- <div class="w3-container">
+      <div class="row">
+        <div class="w3-col.m3">
+          <h4><b>{{ nav.title }}</b></h4>
+          <h6>更新日期, <span class="w3-opacity">{{ nav.modified_time }}</span></h6>
+          <p>
+            <a href="{{ nav.link }}"><button class="w3-button w3-padding-small w3-white w3-border"><b>链接</b></button></a>
+          </p>
+        </div>
+      </div>
+    </div> -->
+
+
+</div>
+{% endblock %}

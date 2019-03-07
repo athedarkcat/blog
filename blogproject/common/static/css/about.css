@@ -1,0 +1,6 @@
+.self-about{
+  min-height: 800px;
+}
+.self-about>p{
+  margin-top: 40px;
+}

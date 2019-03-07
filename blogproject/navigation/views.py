@@ -7,7 +7,6 @@ from .models import *
 # Create your views here.
 
 def navPage(request):
-	
 
 	navs = Nav.objects.all()
 	content = {'navs':navs}
