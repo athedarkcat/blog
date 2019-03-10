@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog',
     'navigation',
     'common',
+    'common.templatetags',
 ]
 
 MIDDLEWARE = [

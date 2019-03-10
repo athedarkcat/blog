@@ -18,32 +18,23 @@
     </div>
   </header>
 
-
-  <div class="w3-container">
+  <div class="w3-row-padding w3-margin-top">
     {% for nav in navs %}
-    <div class="w3-quarter w3-card-4 w3-container w3-margin w3-white" style="min-height:100px;">
-      <div class="w3-container">
+    <div class="w3-third">
+      <div class="w3-card-4 w3-margin-bottom w3-margin-top">
+        <div class="w3-container">
         <h5><b>{{ nav.title }}</b></h5>
         <h6>更新日期, <span class="w3-opacity">{{ nav.modified_time }}</span></h6>
         <p>
           <a href="{{ nav.link }}"><button class="w3-button w3-padding-small w3-white w3-border"><b>链接</b></button></a>
         </p>
       </div>
+      </div>
     </div>
     {% endfor %}
   </div>
 
-    <!-- <div class="w3-container">
-      <div class="row">
-        <div class="w3-col.m3">
-          <h4><b>{{ nav.title }}</b></h4>
-          <h6>更新日期, <span class="w3-opacity">{{ nav.modified_time }}</span></h6>
-          <p>
-            <a href="{{ nav.link }}"><button class="w3-button w3-padding-small w3-white w3-border"><b>链接</b></button></a>
-          </p>
-        </div>
-      </div>
-    </div> -->
+
 
 
 </div>

@@ -23,18 +23,15 @@
     <h3><b>Dark Cat</b></h3>
   </div>
   <div class="w3-bar-block">
-    <!-- <a href="{% url "blog:blog" %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-book  w3-margin-right"></i>CAT FOOD</a> -->
+    <a href="{% url "blog:blog" %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-book  w3-margin-right"></i>CAT FOOD</a>
     <!-- <a href=" onclick=w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-tool fa-fw w3-margin-right"></i>TOOLS</a> -->
     <a href="{% url "nav:nav" %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-link w3-margin-right"></i>LINKS</a>
     <a href="{% url "blog:about" %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-about w3-margin-right"></i>ABOUT</a>
   </div>
   <div class="w3-panel w3-large">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    {% for personlink in personlinks %}
+    <a href="{{ personlink.link }}"><i class="fa fa-{{ personlink.name }} w3-hover-opacity"></i></a>
+    {% endfor %}
   </div>
 </nav>
 
@@ -43,6 +40,7 @@
 
 {% block content %}
 {% endblock %}
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 <script>
 // Script to open and close sidebar
 function w3_open() {
@@ -55,6 +53,9 @@ function w3_close() {
     document.getElementById("myOverlay").style.display = "none";
 }
 </script>
+
+{% block script %}
+{% endblock %}
 
 </body>
 {% endblock %}

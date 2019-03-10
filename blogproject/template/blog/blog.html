@@ -1,7 +1,12 @@
 {% extends 'common/base_nav.html' %}
 {% load staticfiles %}
+{% load tag %}
 
-
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/icon.css' %}">
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
 
 {% block title %}
 <title>Blog | Dark Cat</title>
@@ -21,72 +26,71 @@
     <div class="w3-section w3-bottombar w3-padding-16">
       <span class="w3-margin-right">Filter:</span>
       <button class="w3-button w3-black">ALL</button>
-      <button class="w3-button w3-white"><i class="fa fa-diamond w3-margin-right"></i>Design</button>
-      <button class="w3-button w3-white w3-hide-small"><i class="fa fa-diamond w3-margin-right"></i>Photos</button>
-      <button class="w3-button w3-white w3-hide-small"><i class="fa fa-diamond w3-margin-right"></i>Art</button>
+      {% for cate in cates %}
+        <a href="{% url 'blog:blogfilter' %}{{ article.category.id }}" class="w3-button w3-white w3-hide-small self-btn-filter" ><i class="fa fa-cate w3-margin-right"></i>{{ cate.name }}</a>
+      {% endfor %}
     </div>
     </div>
   </header>
 
-  <!-- First Photo Grid-->
-  <div class="w3-row-padding">
-    <div class="w3-third w3-container w3-margin-bottom">
-      <img src="{% static 'img/demo.jpeg' %}" alt="Norway" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+  <div class="w3-container main">
+    {% for article in articles %}
+    <div class="w3-cell-row self-item">
+      <div class="w3-container self-item-header w3-margin-right">
+        <a href="">{{ article.title }}</a>
+        <span class="self-item-header-time"><i></i>{{ article.modified_time|date:'Y-m-d' }}</span>
+      </div>
+      <div class="w3-container self-item-body">
+        <div class="self-item-body-tag">
+          <i class="fa fa-tag"></i>
+          {% for tag in article.tags.all %}
+          <a href="">{{ tag.name }}</a>
+          {% endfor %}
+        </div>
+        <div class="self-item-body-cate">
+          <i class="fa fa-cate"></i><a href="{% url 'blog:blogfilter' %}{{ article.category.id }}">{{ article.category }}</a>
+        </div>
       </div>
     </div>
-    <div class="w3-third w3-container w3-margin-bottom">
-      <img src="{% static 'img/demo.jpeg' %}" alt="Norway" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      </div>
-    </div>
-    <div class="w3-third w3-container">
-      <img src="{% static 'img/demo.jpeg' %}" alt="Norway" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Second Photo Grid-->
-  <div class="w3-row-padding">
-    <div class="w3-third w3-container w3-margin-bottom">
-      <img src="{% static 'img/demo.jpeg' %}" alt="Norway" style="width:100%;" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom">
-      <img src="{% static 'img/demo.jpeg' %}" alt="Norway" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      </div>
-    </div>
-    <div class="w3-third w3-container">
-      <img src="{% static 'img/demo.jpeg' %}" alt="Norway" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 
   <!-- Pagination -->
   <div class="w3-center w3-padding-32">
     <div class="w3-bar">
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">&laquo;</a>
-      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">&raquo;</a>
+      {% if articles.has_previous %}
+        <a href="?page={{ articles.previous_page_number }}" class="w3-bar-item w3-button w3-hover-black"> &lt;&lt; </a>
+      {% else %}
+        <button class="w3-bar-item w3-button w3-hover-black" disabled> &lt;&lt; </button>
+      {% endif %}
+
+      <span class="current">
+        {% if articles.paginator.num_pages|gt:'5' %}
+          {% for num in articles.number|cut_page:'2'|cut2_page:articles.paginator.num_pages %}
+            {% ifequal articles.number num %}
+              <a href="?page={{ num }}" class="w3-bar-item w3-button w3-black">{{ num }}</a>
+            {% else %}
+              <a href="?page={{ num }}" class="w3-bar-item w3-hover-black w3-button">{{ num }}</a>
+            {% endifequal %}
+          {% endfor %}
+        {% else %}
+          {% for num in articles.paginator.page_range %}
+            {% ifequal articles.number num %}
+              <a href="?page={{ num }}" class="w3-bar-item w3-button w3-black">{{ num }}</a>
+            {% else %}
+              <a href="?page={{ num }}" class="w3-bar-item w3-hover-black w3-button">{{ num }}</a>
+            {% endifequal %}
+          {% endfor %}
+        {% endif %}
+
+          <!-- Page {{ articles.number }} of {{ articles.paginator.num_pages }}. -->
+      </span>
+
+      {% if articles.has_next %}
+        <a href="?page={{ articles.next_page_number }}" class="w3-bar-item w3-button w3-hover-black"> &gt;&gt; </a>
+      {% else %}
+        <button class="w3-bar-item w3-button w3-hover-black" disabled> &gt;&gt; </button>
+      {% endif %}
     </div>
   </div>
 
@@ -99,6 +103,8 @@
 <!-- End page content -->
 </div>
 
+{% endblock %}
 
+{% block script %}
 
 {% endblock %}
