@@ -27,7 +27,7 @@
       <span class="w3-margin-right">Filter:</span>
       <button class="w3-button w3-black">ALL</button>
       {% for cate in cates %}
-        <a href="{% url 'blog:blogfilter' %}{{ article.category.id }}" class="w3-button w3-white w3-hide-small self-btn-filter" ><i class="fa fa-cate w3-margin-right"></i>{{ cate.name }}</a>
+        <a href="" class="w3-button w3-white w3-hide-small self-btn-filter" ><i class="fa fa-cate w3-margin-right"></i>{{ cate.name }}</a>
       {% endfor %}
     </div>
     </div>
@@ -48,7 +48,7 @@
           {% endfor %}
         </div>
         <div class="self-item-body-cate">
-          <i class="fa fa-cate"></i><a href="{% url 'blog:blogfilter' %}{{ article.category.id }}">{{ article.category }}</a>
+          <i class="fa fa-cate"></i><a href="">{{ article.category }}</a>
         </div>
       </div>
     </div>

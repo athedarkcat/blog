@@ -23,10 +23,10 @@
     <h3><b>Dark Cat</b></h3>
   </div>
   <div class="w3-bar-block">
-    <a href="{% url "blog:blog" %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-book  w3-margin-right"></i>CAT FOOD</a>
+    <a href="{% url "blog:blog" %}" onclick="w3_close()" data-path="/blog/blog/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book  w3-margin-right"></i>CAT FOOD</a>
     <!-- <a href=" onclick=w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-tool fa-fw w3-margin-right"></i>TOOLS</a> -->
-    <a href="{% url "nav:nav" %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-link w3-margin-right"></i>LINKS</a>
-    <a href="{% url "blog:about" %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-about w3-margin-right"></i>ABOUT</a>
+    <a href="{% url "nav:nav" %}" onclick="w3_close()" data-path="/nav/nav/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-link w3-margin-right"></i>LINKS</a>
+    <a href="{% url "blog:about" %}" onclick="w3_close()" data-path="/blog/about/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-about w3-margin-right"></i>ABOUT</a>
   </div>
   <div class="w3-panel w3-large">
     {% for personlink in personlinks %}
@@ -52,6 +52,7 @@ function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
 }
+$("a[data-path='{{ request.path }}']").addClass('w3-text-teal');
 </script>
 
 {% block script %}
