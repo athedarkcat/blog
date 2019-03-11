@@ -29,3 +29,15 @@
   background-image: url('/static/img/ios/menus-icon.png');
   background-size: 100% 100%;
 }
+.fa-github{
+  background-image: url('/static/img/ios/github-icon.png');
+  background-size: 100% 100%;
+}
+.fa-tag{
+  background-image: url('/static/img/ios/tag-icon.png');
+  background-size: 100% 100%;
+}
+.fa-cate{
+  background-image: url('/static/img/ios/cate-icon.png');
+  background-size: 100% 100%;
+}
