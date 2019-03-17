@@ -1,0 +1,23 @@
+{% extends 'common/base_nav.html' %}
+{% load staticfiles %}
+
+{% block title %}
+<title>Article | Dark Cat</title>
+{% endblock %}
+
+{% block main %}
+
+  <section class="w3-container w3-padding-64">
+    <h1 class="w3-center"><span class="w3-tag w3-wide">{{ article.title }}</span></h1>
+    <h3 class="w3-right w3-padding">{{ article.modified_time }}</h3>
+  </section>
+
+  <article class="w3-container w3-xlarge">
+    {{ article.body|safe }}
+  </article>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
