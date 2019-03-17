@@ -4,6 +4,7 @@
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/icon.css' %}">
 <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" href="{% static 'css/color.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -11,10 +12,9 @@
 {% endblock %}
 
 {% block body %}
-<body class="w3-light-grey w3-content" style="max-width:1600px">
 
 <!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-collapse w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container">
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
@@ -38,8 +38,13 @@
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-{% block content %}
-{% endblock %}
+<!-- !PAGE CONTENT! -->
+<main class="w3-main" style="margin-left:300px">
+  {% block main %}
+  {% endblock %}
+<!-- End page content -->
+</main>
+
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 <script>
 // Script to open and close sidebar
@@ -52,11 +57,15 @@ function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
 }
-$("a[data-path='{{ request.path }}']").addClass('w3-text-teal');
+var path = '{{ request.path }}'
+if(path.indexOf('/blog/blog/')!=-1){
+  $("a[data-path='/blog/blog/']").addClass('w3-text-teal');
+}else if(path.indexOf('/nav/nav/')!=-1){
+  $("a[data-path='/nav/nav/']").addClass('w3-text-teal');
+}else if(path.indexOf('/blog/about/')!=-1){
+  $("a[data-path='/blog/about/']").addClass('w3-text-teal');
+}
+
 </script>
 
-{% block script %}
-{% endblock %}
-
-</body>
 {% endblock %}
