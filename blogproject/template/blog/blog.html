@@ -6,16 +6,14 @@
 <link rel="stylesheet" href="{% static 'css/icon.css' %}">
 <link rel="stylesheet" href="{% static 'css/w3.css' %}">
 <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+<link rel="stylesheet" href="{% static 'css/color.css' %}">
 {% endblock %}
 
 {% block title %}
 <title>Blog | Dark Cat</title>
 {% endblock %}
 
-{% block content %}
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px">
+{% block main %}
 
   <!-- Header -->
   <header id="catfood">
@@ -25,9 +23,9 @@
     <h1><b>Cat Food</b></h1>
     <div class="w3-section w3-bottombar w3-padding-16">
       <span class="w3-margin-right">Filter:</span>
-      <button class="w3-button w3-black">ALL</button>
+      <a href="{% url 'blog:blogfilter' 'all' 0 %}" class="w3-button w3-black">ALL</a>
       {% for cate in cates %}
-        <a href="" class="w3-button w3-white w3-hide-small self-btn-filter" ><i class="fa fa-cate w3-margin-right"></i>{{ cate.name }}</a>
+        <a href="{% url 'blog:blogfilter' 'cate' cate.id %}" class="w3-button w3-white w3-hide-small self-btn-filter" ><i class="fa fa-cate w3-margin-right"></i>{{ cate.name }}</a>
       {% endfor %}
     </div>
     </div>
@@ -37,18 +35,18 @@
     {% for article in articles %}
     <div class="w3-cell-row self-item">
       <div class="w3-container self-item-header w3-margin-right">
-        <a href="">{{ article.title }}</a>
+        <a href="{% url 'blog:blogArticle' article.id %}">{{ article.title }}</a>
         <span class="self-item-header-time"><i></i>{{ article.modified_time|date:'Y-m-d' }}</span>
       </div>
       <div class="w3-container self-item-body">
         <div class="self-item-body-tag">
           <i class="fa fa-tag"></i>
           {% for tag in article.tags.all %}
-          <a href="">{{ tag.name }}</a>
+          <a href="{% url 'blog:blogfilter' 'tag' tag.id %}">{{ tag.name }}</a>
           {% endfor %}
         </div>
         <div class="self-item-body-cate">
-          <i class="fa fa-cate"></i><a href="">{{ article.category }}</a>
+          <i class="fa fa-cate"></i><a href="{% url 'blog:blogfilter' 'cate' article.category.id %}">{{ article.category }}</a>
         </div>
       </div>
     </div>
@@ -98,10 +96,6 @@
 
 
 
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-
-<!-- End page content -->
-</div>
 
 {% endblock %}
 
