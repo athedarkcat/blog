@@ -11,7 +11,7 @@ class Nav(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
     link = models.CharField(max_length=100,blank=True,null=True)
-    
 
-    def __unicode__(self):
-	 return self.title
+
+    def __str__(self):
+        return self.title

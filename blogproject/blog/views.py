@@ -79,13 +79,10 @@ class ArticleView(ListView):
     def get_queryset(self):
 
         article = Article.objects.get(pk=self.args[0])
-        md = markdown.Markdown(extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.codehilite',
-            'markdown.extensions.toc',
-        ])
-        article.body = md.convert(article.body)
-
+        article.body = markdown.markdown(article.body,extensions=[
+                                    'markdown.extensions.extra',
+                                    'markdown.extensions.codehilite',
+                                    'markdown.extensions.toc',])
         return article
 
     def get_context_data(self,**kwargs):
@@ -103,6 +100,8 @@ def aboutPage(request):
     }
 
     return render(request,'blog/about.html',content)
+
+    
 
 # def articleFilter(request):
 #
