@@ -1,6 +1,14 @@
 {% extends 'common/base_nav.html' %}
 {% load staticfiles %}
 
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/icon.css' %}">
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" href="{% static 'css/color.css' %}">
+<link rel="stylesheet" href="{% static 'css/highlights/default.css' %}">
+<link rel="stylesheet" href="{% static 'css/github-markdown.css' %}">
+{% endblock %}
+
 {% block title %}
 <title>Article | Dark Cat</title>
 {% endblock %}
@@ -8,12 +16,14 @@
 {% block main %}
 
   <section class="w3-container w3-padding-64">
-    <h1 class="w3-center"><span class="w3-tag w3-wide">{{ article.title }}</span></h1>
-    <h3 class="w3-right w3-padding">{{ article.modified_time }}</h3>
+    <h1 class="w3-center"><span class="w3-wide">{{ article.title }}</span></h1>
+    <h3 class="w3-right w3-padding">{{ article.modified_time|date:'Y-m-d' }}</h3>
   </section>
 
-  <article class="w3-container w3-xlarge">
-    {{ article.body|safe }}
+  <article class="w3-container markdown-body" >
+    <pre>
+    {{ article.body | safe }}
+    </pre>
   </article>
 
 {% endblock %}

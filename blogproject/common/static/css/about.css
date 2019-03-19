@@ -1,3 +1,6 @@
 .self-about>p{
   margin-top: 40px;
 }
+.self-about{
+  min-height: 88vh;
+}

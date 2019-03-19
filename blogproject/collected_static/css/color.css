@@ -1,4 +1,16 @@
 
+<<<<<<< HEAD
 main{
   
+=======
+nav{
+background: #C9CCD3;
+ background-image: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%);
+ background-blend-mode: lighten;
+}
+main{
+background-image: -webkit-linear-gradient(top left, #f5f7fa 0%, #c3cfe2 100%);
+background-image: -o-linear-gradient(top left, #f5f7fa 0%, #c3cfe2 100%);
+background-image: linear-gradient(to bottom right, #f5f7fa 0%, #c3cfe2 100%);
+>>>>>>> dev
 }

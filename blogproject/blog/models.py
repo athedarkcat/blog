@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from mdeditor.fields import MDTextField
 
 # Create your models here.
 
@@ -18,7 +19,7 @@ class PersonLink(models.Model):
     class Meta:
         ordering = ['sequence']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Article(models.Model):
@@ -29,7 +30,7 @@ class Article(models.Model):
         ('p', '发表'),
     )
     title = models.CharField('标题', max_length=200, unique=True)
-    body = models.TextField('正文')
+    body = MDTextField()
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
     views = models.PositiveIntegerField('浏览量', default=0)
@@ -40,7 +41,7 @@ class Article(models.Model):
     class Meta:
         ordering = ['-article_order', '-modified_time']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 class Category(models.Model):
@@ -52,7 +53,7 @@ class Category(models.Model):
     class Meta:
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Tag(models.Model):
@@ -60,5 +61,5 @@ class Tag(models.Model):
 
     name = models.CharField('标签名', max_length=30, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
