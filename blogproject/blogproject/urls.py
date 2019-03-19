@@ -18,7 +18,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^tool/', include('tool.urls',namespace='tool')),
-    url(r'^blog/',include('blog.urls',namespace='blog')),
-    url(r'^nav/',include('navigation.urls',namespace='nav')),
+    url(r'^tool/', include(('tool.urls','tool'),namespace='tool')),
+    url(r'^blog/',include(('blog.urls','blog'),namespace='blog')),
+    url(r'^nav/',include(('navigation.urls','navigation'),namespace='nav')),
+    url(r'mdeditor/', include('mdeditor.urls'))
 ]

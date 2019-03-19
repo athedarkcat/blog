@@ -2,13 +2,14 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import get_object_or_404
-
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseNotFound
 from blog.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView, DetailView
+
 import random
+import markdown
 
 # Create your views here.
 
@@ -48,8 +49,15 @@ class BlogFilterView(BlogView):
 
     def get_queryset(self):
 
-        cate_id = 2
-        tmp = Article.objects.filter(category__id__contains=int(cate_id))
+        if self.args[0] == 'cate':
+            tmp = Article.objects.filter(category__id__contains=int(self.args[1]))
+        elif self.args[0] == 'tag':
+            tmp = Article.objects.filter(tags__id__contains=int(self.args[1]))
+        elif self.args[0] == 'all':
+            tmp = Article.objects.all()
+        else:
+            return ''
+
         paginator = Paginator(tmp, 3) # 每页显示25条
         page = self.request.GET.get('page')
         try:
@@ -62,35 +70,27 @@ class BlogFilterView(BlogView):
             articles = paginator.page(paginator.num_pages)
         return articles
 
+class ArticleView(ListView):
 
-def blogPage(request):
+    model = Article
+    template_name = 'blog/article.html'
+    context_object_name = 'article'
 
-    cateSum = len(Category.objects.all())
-    if cateSum > 5:
-        numRadom = random.randint(0,cateSum-5)
-        cates = Category.objects.all()[numRadom:numRadom+4]
-    else:
-        cates = Category.objects.all()
+    def get_queryset(self):
 
-    personlinks = PersonLink.objects.all()
-    articles = Article.objects.all().all()
-    paginator = Paginator(articles, 4) # 每页显示25条
-    page = request.GET.get('page')
-    try:
-        contacts = paginator.page(page)
-    except PageNotAnInteger:
-        # 如果请求的页数不是整数，返回第一页。
-        contacts = paginator.page(1)
-    except EmptyPage:
-        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
-        contacts = paginator.page(paginator.num_pages)
-    content = {
-        'cates':cates,
-        'articles':contacts,
-        'personlinks':personlinks,
-    }
+        article = Article.objects.get(pk=self.args[0])
+        article.body = markdown.markdown(article.body,extensions=[
+                                    'markdown.extensions.extra',
+                                    'markdown.extensions.codehilite',
+                                    'markdown.extensions.toc',])
+        return article
 
-    return render(request,'blog/blog.html',content)
+    def get_context_data(self,**kwargs):
+
+        context = super(ArticleView,self).get_context_data(**kwargs)
+        personlinks = PersonLink.objects.all()
+        context['personlinks'] = personlinks
+        return context
 
 def aboutPage(request):
 
@@ -100,6 +100,8 @@ def aboutPage(request):
     }
 
     return render(request,'blog/about.html',content)
+
+    
 
 # def articleFilter(request):
 #
